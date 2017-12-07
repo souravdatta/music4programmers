@@ -48,7 +48,8 @@ class Music:
             # for mac
             os.system(DARWIN_COMMAND.format(file_name))
         elif sys.platform == 'win32':
-            os.system(WINDOWS_COMMAND.format(file_name))
+            #os.system(WINDOWS_COMMAND.format(file_name))
+            os.startfile(file_name)
         else:
             print('Do not know how to play {}, please play it with your music player'.format(file_name))
 
