@@ -79,7 +79,7 @@ class Music:
         return 'Music (title={}, url={})'.format(self.title, self.url)
 
 
-if __name__ == '__main__':
+def main():
     mdata = Music.create_album_data()
     for m in mdata:
         print(m)
@@ -104,5 +104,10 @@ if __name__ == '__main__':
 
     mdata[choice].play()
     print('done')
+
+
+if __name__ == '__main__':
+    main()
+
 
 
