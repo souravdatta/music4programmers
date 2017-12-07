@@ -98,7 +98,7 @@ def main():
                 raise ValueError()
 
         except ValueError:
-            print('I need a integer number between 1 to {}'.format(len(mdata)))
+            print('I need a number between 1 to {}'.format(len(mdata)))
         else:
             choice_accepted = True
 
