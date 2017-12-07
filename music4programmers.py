@@ -14,10 +14,7 @@ import time
 
 
 FEED_URL = 'https://musicforprogramming.net/rss.php'
-
 DARWIN_COMMAND = 'open "{}"'
-WINDOWS_COMMAND = './cmdmp3win.exe "{}"'
-
 
 def show_progress():
     while True:
@@ -48,8 +45,7 @@ class Music:
             # for mac
             os.system(DARWIN_COMMAND.format(file_name))
         elif sys.platform == 'win32':
-            #os.system(WINDOWS_COMMAND.format(file_name))
-            os.startfile(file_name)
+            os.startfile('"{}\\{}"'.format(os.getcwd(), file_name))
         else:
             print('Do not know how to play {}, please play it with your music player'.format(file_name))
 
@@ -68,7 +64,12 @@ class Music:
         self.audio = None
 
     def play(self):
-        path = self.title + '.mp3'
+        title = self.title
+        title = title.replace(' ', '_')
+        title = title.replace(':', '_')
+        path = title + '.mp3'
+
+        print(path)
 
         if not os.path.exists(path):
             self.download_file(self.url, path)
