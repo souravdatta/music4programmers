@@ -16,6 +16,7 @@ import time
 FEED_URL = 'https://musicforprogramming.net/rss.php'
 DARWIN_COMMAND = 'open "{}"'
 
+
 def show_progress():
     while True:
         print('.', end='')
@@ -24,6 +25,18 @@ def show_progress():
 
 
 class Music:
+    @staticmethod
+    def build_file_path(title):
+        title = title.replace(' ', '_')
+        title = title.replace(':', '_')
+        path = title + '.mp3'
+        home_dir = os.path.expanduser('~') + os.sep + 'music4programming'
+
+        if not os.path.exists(home_dir):
+            os.makedirs(home_dir)
+
+        return '{}{}{}'.format(home_dir, os.sep, path)
+
     @staticmethod
     def download_file(url, file_name):
         req = request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -38,6 +51,7 @@ class Music:
 
         process.terminate()
         print()
+        print('Music downloaded: {}'.format(file_name))
 
     @staticmethod
     def play_a_music(file_name):
@@ -45,7 +59,8 @@ class Music:
             # for mac
             os.system(DARWIN_COMMAND.format(file_name))
         elif sys.platform == 'win32':
-            os.startfile('"{}\\{}"'.format(os.getcwd(), file_name))
+            # for windows
+            os.startfile(file_name)
         else:
             print('Do not know how to play {}, please play it with your music player'.format(file_name))
 
@@ -64,12 +79,7 @@ class Music:
         self.audio = None
 
     def play(self):
-        title = self.title
-        title = title.replace(' ', '_')
-        title = title.replace(':', '_')
-        path = title + '.mp3'
-
-        print(path)
+        path = self.build_file_path(self.title)
 
         if not os.path.exists(path):
             self.download_file(self.url, path)
