@@ -88,7 +88,7 @@ class Music:
         self.play_a_music(path)
 
     def __str__(self):
-        return 'Music (title={}, url={})'.format(self.title, self.url)
+        return '{} ==> {}'.format(self.title, self.url)
 
 
 def list_musics(mdata):
