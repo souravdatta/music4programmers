@@ -1,4 +1,4 @@
-##Music for programmers
+## Music for programmers
 
 This is a simple tool to download info and mp3 files from the awesome site [Music for programming](https://musicforprogramming.net/)
 and play those using the default music player app. This opens iTunes on Mac and Groove Music on Windows 10, however, 
@@ -8,7 +8,7 @@ based on your file type association with mp3 files, the tool will open the corre
 The files are downloaded in user's home directory - whatever `~` expands to. The actual path is
 `~/music4programmers/`. 
 
-###Install
+### Install
 
 * Clone the repo into your local filesystem. 
 * Make sure you have `Python 3.n (n >= 5)` and `pip` installed.
