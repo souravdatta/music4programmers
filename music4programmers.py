@@ -91,31 +91,44 @@ class Music:
         return 'Music (title={}, url={})'.format(self.title, self.url)
 
 
-def main():
-    mdata = Music.create_album_data()
+def list_musics(mdata):
     for m in mdata:
         print(m)
+
+
+def main():
+    mdata = Music.create_album_data()
+    list_musics(mdata)
 
     choice_accepted = False
     choice = 0
 
-    while not choice_accepted:
-        choice = input('Which song? ')
+    while True:
+        while not choice_accepted:
+            choice = input('Which song? (type exit or quit to stop the program, list to list music again)\n: ')
 
-        try:
-            choice = int(choice)
-            choice -= 1
+            if choice == 'quit' or choice == 'exit':
+                sys.exit(0)
 
-            if (choice < 0) or (choice >= len(mdata)):
-                raise ValueError()
+            if choice == 'list':
+                list_musics(mdata)
+                continue
 
-        except ValueError:
-            print('I need a number between 1 to {}'.format(len(mdata)))
-        else:
-            choice_accepted = True
+            try:
+                choice = int(choice)
+                choice -= 1
 
-    mdata[choice].play()
-    print('done')
+                if (choice < 0) or (choice >= len(mdata)):
+                    raise ValueError()
+
+            except ValueError:
+                print('Hmm, bad input that is. Not in range of (1 - {}) it was.'.format(len(mdata)))
+            else:
+                choice_accepted = True
+
+        mdata[choice].play()
+        print('ok')
+        choice_accepted = False
 
 
 if __name__ == '__main__':
