@@ -92,8 +92,10 @@ class Music:
 
 
 def list_musics(mdata):
+    i = 1
     for m in mdata:
-        print(m)
+        print('{}. {}'.format(i, m))
+        i += 1
 
 
 def main():
